@@ -4,12 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- <div class="container pt-5" id="app">
+        <div class="card center">
+            <h1>Счетчик: {{counter}}</h1>
+            <div>
+                <button class="btn primary" v-on:click="counter++">Добавить</button>
+                <button class="btn danger" v-on:click="counter--">Вычесть</button>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="container" id="app">
+        <div class="card">
+            <h1>{{title}}</h1>
+            <div class="form-control">
+                <input type="text">
+            </div>
+            <button class="btn">Добавить</button>
+            <hr>
+        </div>
+    </div>
+
     
-
-
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./app.js"></script>
 </body>
