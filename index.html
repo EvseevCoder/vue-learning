@@ -20,18 +20,44 @@
 
     <div class="container" id="app">
         <div class="card">
-            <h1>{{title}}</h1>
+            <!-- Байндим style. Затем внутри ставим одинарные кавычки. т.к. это уже js -->
+            <h1 :style="{color: inputValue.length == 5 ? 'red' : 'green', fontSize: inputValue.length == 5 ? '1rem' : '2rem'}">{{title}}</h1>
             <div class="form-control">
-                <input type="text"
-                    v-bind:placeholder="placeholder"
-                    v-bind:value="inputValue"
-                    v-on:input="InputChangeHandler">
-                    
 
+                <!-- v-on:keypress='inputKeyPress' и v-on:keypress.enter='addNewNote'  - это одно и то же-->
+                <!-- v-bind: = : и v-on: = @-->
+                <input type="text"
+                    :placeholder="placeholder"
+                    :value="inputValue"
+                    v-model="inputValue"
+                    v-on:keypress.enter='addNewNote'>
+                    
             </div>
             <h2>input value : {{inputValue}}</h2>
-            <button class="btn">Добавить</button>
+            <button class="btn" v-on:click="addNewNote">Добавить</button>
+
             <hr>
+
+            <ul class="list" v-if="notes.length != 0">
+                <li class="list-item" v-for="(myNote, idx) in notes">
+                    <span :class="myNote.length > 5 ? 'primary' : 'bold'">{{myNote}}</span>
+                    <button class="btn danger" v-on:click="delite(idx, $event)">Удалить</button>
+                </li>
+                <hr>
+                <li>
+                    <strong>Общее количество заметок: {{ notes.length }}</strong> <br>
+                    <strong>Удвоенное количество заметок: {{ doubleCountComputed }}</strong>
+                </li>
+            </ul>
+            <!-- v-else и v-if + v-else-if-->
+            <div class="div" v-else="notes.length == 0">
+                <h1>{{ toUpperCase('Заметок нет') }}</h1>
+            </div>
+            <!-- <div class="div" v-if="notes.length == 0">
+                <h1>Заметок нет</h1>
+            </div> -->
+
+
         </div>
     </div>
 
